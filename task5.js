@@ -1,355 +1,507 @@
-// Spread & Rest Operator
-//task-1
-const primary = [100, 200];
-const secondary = [300, 400];
-const combined = [...primary, ...secondary, 500];
-console.log(combined);
+// ES6 + Array Practice Tasks
 
-// task-2
-let scores = [85, 90, 95];
-let backup = [...scores];
-backup.push(100);
-console.log("original:", scores);
-console.log("clone:", backup);
+// 🔹 Spread & Rest Operator
 
-//task-3
-const profile = { name: "Alice", salary: 45000 };
-const updates = { salary: 55000, role: "Senior Developer" };
-const finalProfile = { ...profile, ...updates };
-console.log(finalProfile);
 
-//task-4
-function calculateSum(...vals) {    //here it collect arguments as the array like[10, 20, 30, 40, 50]
-  return vals.reduce((total, num) => total + num, 0);  //here it will loop and add the numbers
+// Merge two arrays [10,20] and [30,40] using spread and add 50 at the end.
+// task-1: Merge and add 50
+
+const lowVals = [10, 20];
+const midVals = [30, 40];
+const combinedSequence = [...lowVals, ...midVals, 50];
+console.log(combinedSequence);
+
+// Clone an array [1,2,3] and modify the clone without affecting the original.
+// task-2: Clone and modify
+
+let originalScores = [1, 2, 3];
+let updatedScores = [...originalScores];
+updatedScores.push(4);
+console.log("original:", originalScores);
+console.log("clone:", updatedScores);
+
+// Merge two objects where both have a salary key — observe which value overrides.
+// task-3: Object merge (last key wins)
+
+const baseRecord = { name: "John", salary: 20000 };
+const priorityRecord = { salary: 30000, role: "Developer" };
+const finalEmployee = { ...baseRecord, ...priorityRecord };
+console.log(finalEmployee); // salary will be 30000
+
+// Create a function that accepts unlimited numbers using rest and returns their sum.
+// task-4: Rest parameter sum
+
+function aggregate(...nums) {
+  return nums.reduce((total, val) => total + val, 0);
 }
-console.log(calculateSum(10, 20, 30, 40, 50));  //final output = 150
+console.log(aggregate(1, 2, 3, 4, 5));
 
-//task-5
-function logExtras(id, ...details) {
-    console.log(details);
+// Create a function that takes first two parameters separately and rest as an array — print only rest values.
+// task-5: Separate first two, rest as array
+
+function processBatch(id, category, ...metadata) {
+    console.log(metadata);
 }
-logExtras(1, "React", "Node", "MongoDB", "Express");
+processBatch(10, 20, 30, 40, 40);
 
-//Destructuring
-//task-6
-let dimensions = [120, 240, 360, 480];
-let [width, h1, h2, depth] = dimensions;
-console.log("first element:", width); 
-console.log("last element:", depth);  
 
-//task-7
-let xCoord = 50;
-let yCoord = 150;
-[xCoord, yCoord] = [yCoord, xCoord];
-console.log(xCoord); // 150
-console.log(yCoord); // 50
+// ================================================================================
 
-//task-8
-let matrix = ["A", ["B", ["C", ["D"]]]];
-let [val1, [val2, [val3, [val4]]]] = matrix;
-console.log(val4);
 
-//task-9
-const user = { name: "Sarah", age: 32 };
-const { name: handle, age: userAge } = user;
-console.log(handle); 
-console.log(userAge);      
+// 🔹 Destructuring
 
-//task-10
-const config = { theme: "dark" };
-const { theme, mode = "auto" } = config;
-console.log(theme); 
-console.log(mode);  
 
-// Basic Array Operations
-//task-11
-let digits = [10, 11, 12, 13, 14];
-digits.push(15, 16);
-console.log(digits); 
+// Extract first and last value from [5,10,15,20] using destructuring.
+// task-6: First and Last
 
-//task-12
-let prices = [9.99, 19.99, 29.99];
-let lastPrice = prices.pop();
-console.log("removed last element:", lastPrice);
+let points = [5, 10, 15, 20];
+let [start, m1, m2, end] = points;
+console.log("first element:", start);
+console.log("last element:", end);
 
-//task-13
-let queue = ["User1", "User2", "User3"];
-let processed = queue.shift();
-console.log("first element:", processed);
+// Swap two variables using destructuring.
+// task-7: Swap variables
+
+let alpha = 10;
+let beta = 20;
+[alpha, beta] = [beta, alpha];
+console.log(alpha); // 20
+console.log(beta);  // 10
+
+// From nested array [1,[2,[3,[4]]]], extract value 4.
+// task-8: Nested extraction
+
+let deepNest = [1, [2, [3, [4]]]];
+let [v1, [v2, [v3, [target]]]] = deepNest;
+console.log(target); // 4
+
+
+// Destructure object {name:"John", age:25} and rename variables (name → userName).
+// task-9: Rename variables
+
+const profile = { name: "John", age: 25 };
+const { name: userName, age: userAge } = profile;
+console.log(userName);
+
+// Set default value while destructuring when property is missing.
+// task-10: Default values
+
+const settings = { name1: "ben" };
+const { name1, age1 = 18 } = settings;
+console.log(age1); // 18
+
+
+// ================================================================================
+
+
+// 🔹 Basic Array Operations
+
+
+// Add values [6,7] to [1,2,3,4,5] using push.
+// task-11: Push
+
+let primaryDigits = [1, 2, 3, 4, 5];
+primaryDigits.push(6, 7);
+console.log(primaryDigits);
+
+// Remove last element and store it in a variable.
+// task-12: Pop
+
+let stack = [1, 2, 3, 4, 5];
+let removedItem = stack.pop();
+console.log("removed last element:", removedItem);
+
+// Remove first element and log remaining array.
+// task-13: Shift
+
+let queue = [1, 2, 3, 4];
+let served = queue.shift();
+console.log("first element:", served);
 console.log(queue);
 
-//task-14
-let levels = [2, 3, 4, 5];
-levels.unshift(0);
-console.log("after adding the frst element:", levels);
+// Add element at beginning using unshift.
+// task-14: Unshift
 
-//task-15
-let sequence = [10, 20, 30, 40, 50, 60];
-sequence.splice(1, 4);  //splice(startIndex, deleteCount)
-console.log(sequence); // [10, 60]
+let list = [2, 3, 4, 5];
+list.unshift(1);
+console.log("after adding the first element:", list);
 
-//Slice/Splice/Flat 
-//task-16
-let hexCodes = [100, 200, 300, 400, 500, 600, 700];
-let subset = hexCodes.slice(1, 4); //slice(start, end)
-console.log(subset); // [200, 300, 400]
+// Use splice() to remove middle elements from [1,2,3,4,5,6].
+// task-15: Splice middle
 
-//task-17
-let markers = [10, 20, 30, 40, 50];
-markers.splice(1, 3, 88, 99); 
-console.log(markers); // [10, 88, 99, 50]
+let midRemove = [1, 2, 3, 4, 5, 6];
+midRemove.splice(2, 3); 
+console.log(midRemove); // [1, 2, 6]
 
-//task-18
-let deepArray = [10, [20, [30, [40]]]];
-let flatDeep = deepArray.flat(Infinity);
-console.log(flatDeep);
 
-//task-19
-let nested = [1, [2, [3, [4]]]];
-let shallowFlat = nested.flat(1);
-console.log(shallowFlat);
+// ================================================================================
 
-//task-20
-let steps = [1, 2, 5];
-steps.splice(2, 0, 3, 4);
-console.log(steps); // [1, 2, 3, 4, 5]
 
-//Searching & Checking
-//task-21
-let ids = [101, 202, 303, 404];
-console.log(ids.includes(202)); 
+// 🔹 Slice / Splice / Flat
 
-//task-22
-let repeats = [1, 2, 9, 4, 9, 6];
-let pos = repeats.indexOf(9, 3); 
-console.log(pos); // 4
 
-//task-23
-let versions = [1, 2, 1, 3, 1];
-let lastIdx = versions.lastIndexOf(1); 
-console.log(lastIdx); // 4
+// Extract [4000,5000,6000] using slice().
+// task-16: Slice
 
-//task-24
-let ages = [18, 21, 25, 30];
-let allAdults = ages.every(a => a >= 18);
-console.log(allAdults); 
+let priceRange = [1000, 2000, 3000, 4000, 5000, 6000, 7000];
+let midSection = priceRange.slice(3, 6);
+console.log(midSection); // [4000, 5000, 6000]
 
-//task-25
-let marks = [45, 50, 85, 30];
-let hasDistinction = marks.some(m => m > 80);
-console.log(hasDistinction);
+// Replace 2 elements in an array using splice().
+// task-17: Splice replace
 
-//Sorting
-//task-26
-let unordered = [40, 10, 100, 25];
-unordered.sort((a, b) => a - b);
-console.log("ascending order", unordered); 
+let codes = [1, 2, 3, 4, 5];
+codes.splice(2, 2, 99, 100);
+console.log(codes);
 
-//task-27
-unordered.sort((a, b) => b - a);
-console.log("descending order", unordered);
+// Flatten [1,[2,[3,[4]]]] completely.
+// task-18: Flat Infinity
 
-//task-28
-let developers = [
-  { name: "John", salary: 35000 },
-  { name: "Ben", salary: 65000 },
-  { name: "Bob", salary: 25000 }
-];
-developers.sort((a, b) => a.salary - b.salary);
-console.log(developers);
+let tangled = [1, [2, [3, [4]]]];
+let linear = tangled.flat(Infinity);
+console.log(linear);
 
-//task-29
-let bits = [0, 1, 0, 1];
-bits.reverse();
-console.log(bits);
+// Flatten only one level of nested array.
+// task-19: Flat level 1
 
-//task-30
-let mixed = [2, 11, 22, 1];
-mixed.sort();   //string sorting
-console.log(mixed); // [1, 11, 2, 22] 
+let multiLevel = [1, [2, [3, [4]]]];
+let flatOne = multiLevel.flat(1);
+console.log(flatOne);
 
-//Higher Order Functions
-//ForEach
-//task-31
-let dataset = [100, 200, 300];
-dataset.forEach(item => console.log(item));
+// Insert values without deleting using splice().
+// task-20: Splice insert
 
-//task-32
-let baseValues = [5, 10, 15];
-let resultVal = baseValues.forEach(v => v * 10);
-console.log(resultVal); // undefined
+let gapArray = [1, 2, 5];
+gapArray.splice(2, 0, 3, 4);
+console.log(gapArray);
 
-//map
-//task-33
-let points = [1, 2, 3];
-let doubled = points.map(p => p * 2);
-console.log(doubled); 
 
-//task-34
-let cities = ["london", "paris", "tokyo"];
-let shoutCities = cities.map(c => c.toUpperCase());
-console.log(shoutCities); 
+// ================================================================================
 
-//task-35
+
+// 🔹 Searching & Checking
+
+
+// Check if value 100 exists in an array.
+// task-21: Includes
+
+let checkList = [100, 200, 300, 400];
+console.log(checkList.includes(100));
+
+// Find index of value 3 starting from index 2.
+// task-22: IndexOf with start
+
+let dataset = [1, 2, 3, 4, 3, 5];
+let foundAt = dataset.indexOf(3, 2);
+console.log(foundAt);
+
+// Find last occurrence of 5 in [1,5,3,5,2].
+// task-23: LastIndexOf
+
+let occurences = [1, 5, 3, 5, 2];
+let lastPos = occurences.lastIndexOf(5);
+console.log(lastPos);
+
+// Check if all values are positive using every().
+// task-24: Every
+
+let values = [10, 20, 30, 40];
+let allPositive = values.every(num => num > 0);
+console.log(allPositive);
+
+// Check if any value is greater than 50 using some().
+// task-25: Some
+
+let weights = [10, 20, 60, 40];
+let hasHeavy = weights.some(w => w > 50);
+console.log(hasHeavy);
+
+
+// ================================================================================
+
+
+// 🔹 Sorting
+
+
+// Sort [10,5,100,1] in ascending order correctly.
+// task-26: Ascending
+
+let mixNumbers = [10, 5, 100, 1];
+mixNumbers.sort((a, b) => a - b);
+console.log("ascending order", mixNumbers);
+
+// Sort array of numbers in descending order.
+// task-27: Descending
+
+mixNumbers.sort((a, b) => b - a);
+console.log("descending order", mixNumbers);
+
+// Sort array of objects by salary.
+// task-28: Object sort
+
 let staff = [
-  { name: "Anna", salary: 40000 },
-  { name: "Mike", salary: 55000 }
+  { name: "John", salary: 30000 },
+  { name: "ben", salary: 50000 },
+  { name: "Bob", salary: 20000 }
 ];
-let payroll = staff.map(s => s.salary);
-console.log(payroll); 
+staff.sort((a, b) => a.salary - b.salary);
+console.log(staff);
 
-//filter
-//task-36
-let inventory = [
-  { name: "Monitor", price: 200 },
-  { name: "Laptop", price: 1200 },
-  { name: "Mouse", price: 25 }
+// Reverse a sorted array.
+// task-29: Reverse
+
+let countdown = [1, 5, 6, 9];
+countdown.reverse();
+console.log(countdown);
+
+// Identify why default sort() fails for numbers.
+// task-30: Default sort behavior
+
+let defaultSort = [10, 5, 100, 1];
+defaultSort.sort(); // String sorting: "1", "10", "100", "5"
+console.log(defaultSort);
+
+
+// ================================================================================
+
+
+// 🔹 Higher Order Functions
+
+
+// forEach
+// Print all elements of an array using forEach().
+// task-31: forEach print
+
+let items = [10, 20, 30, 40];
+items.forEach(el => console.log(el));
+
+// Try returning value from forEach() — observe result.
+// task-32: forEach return
+
+let numbers = [1, 2, 3];
+let testReturn = numbers.forEach(n => n * 2);
+console.log(testReturn); // undefined
+
+// map
+// Convert [1,2,3] into [2,4,6].
+// task-33: Map multiply
+
+let inputs = [1, 2, 3];
+let doubled = inputs.map(i => i * 2);
+console.log(doubled);
+
+// Convert array of names to uppercase.
+// task-34: Map uppercase
+
+let users = ["john", "ben", "bob"];
+let shouting = users.map(u => u.toUpperCase());
+console.log(shouting);
+
+// Extract only salary from employee objects.
+// task-35: Map extract key
+
+let corps = [
+  { name: "John", salary: 30000 },
+  { name: "Ben", salary: 50000 },
+  { name: "Bob", salary: 20000 }
 ];
-let expensive = inventory.filter(p => p.price > 500);
-console.log(expensive);
+let payScale = corps.map(c => c.salary);
+console.log(payScale);
 
-//task-37
-let nums = [11, 22, 33, 44, 55, 66];
-let divisibleByTwo = nums.filter(n => n % 2 === 0);
-console.log(divisibleByTwo); 
+// filter
+// Filter employees with salary > 300000.
+// task-36: Filter objects
 
-//task-38
-let fruit = ["kiwi", "banana", "watermelon", "pear"];
-let longFruit = fruit.filter(f => f.length > 5);
-console.log(longFruit); 
-
-//find
-//task-39
-let readings = [15, 45, 75, 95];
-let firstHigh = readings.find(r => r > 50);
-console.log("first matched numder:", firstHigh); 
-
-//task-40
-let candidates = [
-  { name: "Joy", score: 70 },
-  { name: "Pat", score: 90 },
-  { name: "Leo", score: 85 }
+let highEarners = [
+  { name: "John", salary: 300000 },
+  { name: "Ben", salary: 500000 },
+  { name: "Bob", salary: 600000 }
 ];
-let topCandidate = candidates.find(c => c.score > 80);
-console.log(topCandidate);
+let filteredCorps = highEarners.filter(e => e.salary > 300000);
+console.log(filteredCorps);
 
-//Reduce
-//task-41
-let expenses = [150, 250, 350];
-let totalCost = expenses.reduce((acc, curr) => acc + curr, 0);
-console.log(totalCost); 
+// Get even numbers from an array.
+// task-37: Filter evens
 
-//task-42
-let weights = [5, 12, 8, 22, 14];
-let heaviest = weights.reduce((peak, w) => 
-  w > peak ? w : peak
-);
-console.log(heaviest); 
+let stream = [1, 2, 3, 4, 5, 6];
+let evenStream = stream.filter(s => s % 2 === 0);
+console.log(evenStream);
 
-//task-43
-let items = ["a", "b", "c", "d"];
-let lengthCount = items.reduce(count => count + 1, 0);
-console.log(lengthCount); 
+// Filter strings with length > 5.
+// task-38: Filter string length
 
-//task-44
-let letters = ["X", "Y", "Z"];
-let letterObj = letters.reduce((obj, char, idx) => { 
-  obj[idx] = char;
+let dictionary = ["apple", "banana", "grapes", "kiwi"];
+let longTerms = dictionary.filter(d => d.length > 5);
+console.log(longTerms);
+
+// find
+// Find first number greater than 50.
+// task-39: Find first match
+
+let sensors = [10, 40, 60, 80];
+let trigger = sensors.find(s => s > 50);
+console.log("first matched number:", trigger);
+
+// Find first employee with salary < 200000.
+// task-40: Find object
+
+let lowPayList = [
+  { name: "John", salary: 300000 },
+  { name: "Ben", salary: 500000 },
+  { name: "Bob", salary: 150000 }
+];
+let result = lowPayList.find(e => e.salary < 200000);
+console.log(result);
+
+
+// ================================================================================
+
+
+// 🔹 Reduce (Important 🔥)
+
+
+// Find total sum of [10,20,30].
+// task-41: Sum
+
+let batch = [10, 20, 30];
+let totalSum = batch.reduce((acc, curr) => acc + curr, 0);
+console.log(totalSum);
+
+// Find maximum number using reduce.
+// task-42: Max
+
+let stats = [10, 50, 30, 80, 20];
+let peakVal = stats.reduce((max, n) => n > max ? n : max);
+console.log(peakVal);
+
+// Count total number of elements.
+// task-43: Count
+
+let collection = [1, 2, 3, 4, 5];
+let size = collection.reduce(acc => acc + 1, 0);
+console.log(size);
+
+// Convert array into object using reduce.
+// task-44: Array to Object
+
+let keys = ["a", "b", "c"];
+let keyMap = keys.reduce((obj, val, idx) => {
+  obj[idx] = val;
   return obj;
 }, {});
-console.log(letterObj);
- 
-//task-45
-let projectStaff = [
-  { name: "Alice", hours: 40 },
-  { name: "Bob", hours: 35 },
-  { name: "Charlie", hours: 25 }
+console.log(keyMap);
+
+// Calculate total salary of employees.
+// task-45: Total Salary
+
+let devTeam = [
+  { name: "John", salary: 30000 },
+  { name: "Alice", salary: 50000 },
+  { name: "Bob", salary: 20000 }
 ];
-let totalHours = projectStaff.reduce(
-  (sum, person) => sum + person.hours,
-  0
-);
-console.log(totalHours); 
+let payrollTotal = devTeam.reduce((sum, dev) => sum + dev.salary, 0);
+console.log(payrollTotal);
 
-// Conversion
-//task-46
-let coord = [10, 20, 30];
-let coordStr = coord.toString();
-console.log(coordStr); 
 
-//task-47
-let wordsList = ["Home", "About", "Contact"];
-let nav = wordsList.join(" | ");
-console.log(nav); 
+// ================================================================================
 
-//task-48
-let csv = "Red,Blue,Green";
-let colors = csv.split(",");
-console.log(colors); 
 
-//task-49
-let layered = [1, [2, [3, 4]]];
-let flatString = layered.flat(Infinity).join(":");
-console.log(flatString); 
+// 🔹 Conversion
 
-//task-50
-let tags = ["tech", "coding", "web"];
-let hashtag = tags
-  .map(t => t.toUpperCase())
-  .join("#");
-console.log("#" + hashtag); 
 
-//Bonus (Real-World Tasks)
-//task-51
-let wishlist = [
-  { title: "Game", cost: 60, amount: 1 },
-  { title: "Controller", cost: 50, amount: 2 },
-  { title: "Headset", cost: 100, amount: 1 }
+// Convert array [1,2,3] into string using toString().
+// task-46: toString
+
+let coords = [1, 2, 3];
+console.log(coords.toString());
+
+// Join array with " - " separator.
+// task-47: Join
+
+let segments = [1, 2, 3];
+console.log(segments.join(" - "));
+
+// Convert string "1,2,3" into array.
+// task-48: Split
+
+let dataString = "1,2,3";
+let dataArray = dataString.split(",");
+console.log(dataArray);
+
+// Convert nested array into flat string.
+// task-49: Flat + Join
+
+let deepList = [1, [2, [3, 4]]];
+let stringified = deepList.flat(Infinity).join(",");
+console.log(stringified);
+
+// Combine map + join to create sentence from words.
+// task-50: Map + Join
+
+let phrases = ["hello", "world", "javascript"];
+let finalSentence = phrases.map(p => p.toUpperCase()).join(" ");
+console.log(finalSentence);
+
+
+// ================================================================================
+
+
+// 🟣 Bonus (Real-World Tasks)
+
+
+// Build a mini cart total calculator using reduce().
+// task-51: Cart Total
+
+let groceryCart = [
+  { item: "Shirt", price: 500, qty: 2 },
+  { item: "Shoes", price: 1000, qty: 1 },
+  { item: "Cap", price: 200, qty: 3 }
 ];
-let grandTotal = wishlist.reduce((sum, p) => 
-  sum + (p.cost * p.amount), 0
-);
-console.log(grandTotal);  
+let cartTotal = groceryCart.reduce((acc, p) => acc + (p.price * p.qty), 0);
+console.log(cartTotal);
 
-//task-52
-let hardware = [
-  { device: "Keyboard", price: 45 },
-  { device: "Mouse", price: 20 },
-  { device: "Monitor", price: 300 }
+// Filter products under ₹500.
+// task-52: Price Filter
+let catalog = [
+  { name: "Pen", price: 50 },
+  { name: "Bag", price: 700 },
+  { name: "Book", price: 300 }
 ];
-let budgetGear = hardware.filter(h => h.price < 100);
-console.log(budgetGear);
+let budgetItems = catalog.filter(c => c.price < 500);
+console.log(budgetItems);
 
-//task-53
-let namesList = ["Python", "Java", "Javascript", "C++"];
-let query = "java";
-let filteredNames = namesList.filter(n => 
-  n.toLowerCase().includes(query.toLowerCase())
+// Create search functionality using filter().
+// task-53: Search
+
+let hardware = ["Laptop", "Mobile", "Tablet", "Mouse"];
+let searchTerm = "mo";
+let searchResults = hardware.filter(h => 
+  h.toLowerCase().includes(searchTerm.toLowerCase())
 );
-console.log(filteredNames); 
+console.log(searchResults);
 
-//task-54
-let duplicates = [7, 8, 8, 9, 10, 10, 11];
-let uniqueSet = duplicates.filter((val, i) => 
-  duplicates.indexOf(val) === i
-);
-console.log(uniqueSet); 
+// Remove duplicates from array.
+// task-54: Remove Duplicates
 
-//task-55
-let workers = [
-  { name: "Dina", pay: 25000 },
-  { name: "Erik", pay: 55000 },
-  { name: "Faye", pay: 95000 },
-  { name: "Gabe", pay: 20000 }
+let rawData = [1, 2, 2, 3, 4, 4, 5];
+let uniqueData = rawData.filter((val, idx) => rawData.indexOf(val) === idx);
+console.log(uniqueData);
+
+// Group employees by salary range.
+// task-55: Grouping
+let workforce = [
+  { name: "John", salary: 20000 },
+  { name: "Alice", salary: 50000 },
+  { name: "Bob", salary: 80000 },
+  { name: "Sam", salary: 15000 }
 ];
-
-let categorized = workers.reduce((acc, person) => {
-  let status = person.pay < 30000 ? "Junior" :
-               person.pay < 70000 ? "Mid" : "Senior";
-
-  if (!acc[status]) acc[status] = [];
-  acc[status].push(person);
+let groupedPay = workforce.reduce((acc, emp) => {
+  let tier = emp.salary < 30000 ? "Low" : emp.salary < 70000 ? "Medium" : "High";
+  if (!acc[tier]) acc[tier] = [];
+  acc[tier].push(emp);
   return acc;
 }, {});
+console.log(groupedPay);
 
-console.log(categorized);
+
+// ================================================================================
